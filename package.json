@@ -1,5 +1,5 @@
 {
-  "name": "note-taker",
+  "name": "noteta",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -10,5 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
