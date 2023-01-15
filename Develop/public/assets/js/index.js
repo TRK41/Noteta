@@ -3,6 +3,11 @@ let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
+const uuid = () => {
+  return Math.floor((1 + Math.random()) * 0x10000)
+    .toString(16)
+    .substring(1);
+};
 
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
