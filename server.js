@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static('public'));
+
 //Get request
 app.get('/', (req, res) => {//'/' will be directed to 'public/index.html page'
   res.sendFile(path.join(__dirname, 'public/index.html'));
@@ -26,6 +27,11 @@ app.get('/api/notes', (req, res) => res.json(noteData));//'/api/notes' will be d
 app.get('*', (req, res) => { //anything will be directed to 'public/index.html'
   res.sendFile(path.join(__dirname, 'public/index.html'));
 });
+
+
+const createNewNote = () =>{}
+
+
 // Post request
 app.post('/api/notes', (req, res) => {
   console.log('method:', req.method);
