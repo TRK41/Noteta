@@ -1,5 +1,5 @@
 const express = require('express');
-const noteData = require('./db/notes.json');
+const noteData = require('./db/db.json');
 const PORT = 3001;
 const path = require('path');
 const uuid = require('./helpers/uuid');
