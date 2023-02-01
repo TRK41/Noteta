@@ -13,10 +13,6 @@ app.use(express.json());
 app.use(express.static('public'));
 const PORT = process.env.PORT || 8000;
 
-//Get request
-// app.get('/', (req, res) => {//'/' will be directed to 'public/index.html page'
-//   res.sendFile(path.join(__dirname, 'public/index.html'));
-// });
 
 app.get('/notes', (req, res) => { //'/notes' will be directed to 'public/notes.html page'
   res.sendFile(path.join(__dirname, 'public/notes.html'));
@@ -31,12 +27,11 @@ app.get('/api/notes', (req, res) => {
 })//'/api/notes' will be directed to ./db/db.json 
 
 
-
 // Post request
 app.post('/api/notes', (req, res) => {
-  const newNote  = req.body;
-  const noteList = JSON.parse(fs.readFileSync('./db/db.json'));
-  const listLength = (noteList.length).toString();
+  let newNote  = req.body;
+  let noteList = JSON.parse(fs.readFileSync('./db/db.json'));
+  let listLength = (noteList.length).toString();
 
   newNote.id = listLength;
   noteList.push(newNote);
@@ -53,8 +48,23 @@ app.post('/api/notes', (req, res) => {
 //Put request
 app.put('/api/notes/:id', (req, res) => res.json(noteData));
 
-// // Delete request
-// app.delete('/api/notes/:id', (req, res) => res.json(noteData));
+
+
+// Delete request
+app.delete('/api/notes/:Id', (req, res) => {
+let noteList = JSON.parse(fs.readFileSync('./db/db.json'));
+let noteId = (req.params.Id).toString(); 
+
+noteList = noteList.filter(selected => {
+  return selected.id != noteId
+})
+
+const noteString = JSON.stringify(noteList);
+
+fs.writeFileSync('./db/db.json', noteString,);
+     console.log( `Note has been deleted from JSON file`);
+      res.json(noteList)
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`);
